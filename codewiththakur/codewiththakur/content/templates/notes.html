@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Study Notes - CodeWithThakur{% endblock %}
+
+{% block content %}
+<section class="notes-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold"><i class="fas fa-book me-2"></i>Study Materials</h2>
+        <div class="row g-4">
+            {% for note in notes %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">{{ note.title }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ note.description }}</p>
+                        <div class="mt-auto">
+                            {% if note.pdf %}
+                            <a href="{{ note.pdf.url }}" class="btn btn-outline-primary btn-sm" download>
+                                <i class="fas fa-file-pdf me-2"></i>Download PDF
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <small class="text-muted">Created: {{ note.created_at|date:"M d, Y" }}</small>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <div class="alert alert-info" role="alert">
+                    No notes available at the moment. Check back later!
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

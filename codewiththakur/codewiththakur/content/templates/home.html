@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Home - CodeWithThakur{% endblock %}
+
+{% block content %}
+
+<section class="hero-section py-5 text-center text-white" style="background: linear-gradient(135deg, #6C63FF, #FF6584);">
+    <div class="container">
+        <h1 class="display-4 mb-4 fw-bold">Master Programming with CodeWithThakur</h1>
+        <p class="lead mb-4">Your one-stop platform for learning programming, web development, and more.</p>
+        <a href="#features" class="btn btn-light btn-lg">Explore Features</a>
+    </div>
+</section>
+
+
+<section id="features" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold" style="color: black;">Our Features</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-book-open fa-3x mb-3" style="color: #6C63FF;"></i>
+                        <h5 class="card-title">Comprehensive Notes</h5>
+                        <p class="card-text">Detailed and structured notes from basics to advanced topics.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-video fa-3x mb-3" style="color: #FF6584;"></i>
+                        <h5 class="card-title">Recorded Video Tutorials</h5>
+                        <p class="card-text">High-quality video lectures for self-paced learning.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-map-marked-alt fa-3x mb-3" style="color: #6C63FF;"></i>
+                        <h5 class="card-title">Roadmaps for Developers</h5>
+                        <p class="card-text">Step-by-step learning paths to master programming.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-code fa-3x mb-3" style="color: #FF6584;"></i>
+                        <h5 class="card-title">Live Coding Practice</h5>
+                        <p class="card-text">Practice coding with real-time challenges and solutions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tasks fa-3x mb-3" style="color: #6C63FF;"></i>
+                        <h5 class="card-title">Quizzes & Assignments</h5>
+                        <p class="card-text">Test your knowledge with interactive quizzes and exercises.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user-friends fa-3x mb-3" style="color: #FF6584;"></i>
+                        <h5 class="card-title">Community Support</h5>
+                        <p class="card-text">Join a programming community to discuss and learn together.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+

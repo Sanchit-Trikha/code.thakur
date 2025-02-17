@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Roadmap{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Roadmaps</h1>
+        <div class="row">
+            {% for roadmap in roadmaps %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ roadmap.title }}</h5>
+                        <p class="card-text">{{ roadmap.description }}</p>
+                        {% if roadmap.pdf %}
+                        <a href="{{ roadmap.pdf.url }}" target="_blank" class="btn btn-primary btn-sm">
+                            <i class="fas fa-download me-2"></i>Download PDF
+                        </a>
+                        {% else %}
+                        <p class="text-muted small">No PDF available</p>
+                        {% endif %}
+                        <p class="text-muted small mt-2">Created on: {{ roadmap.created_at }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-center">No roadmaps available.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
