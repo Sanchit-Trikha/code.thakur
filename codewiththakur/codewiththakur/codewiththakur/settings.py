@@ -104,6 +104,9 @@ if os.path.exists(os.path.join(BASE_DIR, 'static')):
 else:
     STATICFILES_DIRS = []
 
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+
 
 # Media files settings
 MEDIA_URL = '/media/'
