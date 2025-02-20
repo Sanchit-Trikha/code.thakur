@@ -3,16 +3,18 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+# ✅ .env file ko load karega
+load_dotenv()
+
 # Base directory path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security settings
-
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['<codewiththakur>.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
 
 # Installed apps
 INSTALLED_APPS = [
@@ -73,7 +75,6 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL:
     DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
 
-
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -99,24 +100,15 @@ USE_TZ = True
 # Static files settings
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Collects static files here
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files settings
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# ✅ API Key ko environment variable se fetch karein
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY", "default-key-if-missing")
+
 # Default auto field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# ✅ .env file ko load karega
-load_dotenv()
-
-# ✅ API Key ko environment variable se fetch karein
-YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY", "default-key-if-missing") 
-
-
-
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Collects static files here
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
