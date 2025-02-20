@@ -3,21 +3,20 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# ✅ .env file ko load karega
+# ✅ Load .env file
 load_dotenv()
 
-# Base directory path
+# ✅ Base directory path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Security settings
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+# ✅ Security settings
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-default-secret-key')
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
-
-# Installed apps
+# ✅ Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,12 +25,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'content',  # Your Django app
+    'whitenoise.runserver_nostatic',  # ✅ Ensure Whitenoise runs properly
 ]
 
-# Middleware
+# ✅ Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ Required for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,10 +40,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Root URL configuration
+# ✅ Root URL configuration
 ROOT_URLCONF = 'codewiththakur.urls'
 
-# Template settings
+# ✅ Template settings
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -60,60 +60,52 @@ TEMPLATES = [
     },
 ]
 
-# WSGI application
+# ✅ WSGI application
 WSGI_APPLICATION = 'codewiththakur.wsgi.application'
 
-# Database configuration
+# ✅ Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # Local database
+        'NAME': BASE_DIR / 'db.sqlite3',  # ✅ Local database
     }
 }
 
-# Use PostgreSQL on Render if DATABASE_URL is available
+# ✅ Use PostgreSQL if DATABASE_URL is available
 DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL:
-    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
+    DATABASES['default'] = dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
 
-# Password validation
+# ✅ Password validation
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
+# ✅ Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files settings
-if os.path.exists(os.path.join(BASE_DIR, 'static')):
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-else:
-    STATICFILES_DIRS = []
-
-# Static files (CSS, JavaScript, Images)
+# ✅ Static files settings
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # ✅ Required for collectstatic
 
+# ✅ Collect static files only if 'static' directory exists
+STATICFILES_DIRS = [BASE_DIR / 'static'] if (BASE_DIR / 'static').exists() else []
 
-# Media files settings
+# ✅ Serve static files with Whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# ✅ Media files settings
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
-# ✅ API Key ko environment variable se fetch karein
+# ✅ API Key from environment variables
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY", "default-key-if-missing")
 
-# Default auto field
+# ✅ Default auto field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
