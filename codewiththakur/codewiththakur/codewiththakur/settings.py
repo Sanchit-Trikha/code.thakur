@@ -7,9 +7,12 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security settings
-SECRET_KEY = os.getenv("SECRET_KEY", "your-fallback-secret-key")
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+
 DEBUG = os.getenv("DEBUG", "False") == "True"
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['<codewiththakur>.vercel.app', 'localhost', '127.0.0.1']
 
 # Installed apps
 INSTALLED_APPS = [
@@ -111,7 +114,6 @@ load_dotenv()
 # ✅ API Key ko environment variable se fetch karein
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY", "default-key-if-missing") 
 
-ALLOWED_HOSTS = ['your-app-name.onrender.com', 'localhost', '127.0.0.1']
 
 
 STATIC_URL = '/static/'
